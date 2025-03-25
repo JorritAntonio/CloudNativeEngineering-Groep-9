@@ -1,6 +1,6 @@
 import { User } from "./user";
 
-export class thread{
+export class Thread{
     private id?: number | undefined;
     private title: string;
     private creationDate: Date;
