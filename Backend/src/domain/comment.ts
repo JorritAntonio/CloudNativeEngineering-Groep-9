@@ -2,16 +2,14 @@ import { User } from "./user";
 import { Thread } from "./thread";
 
 export class Comment{
-    private id?: number 
-    private title: string;
+    private id: number 
     private content: string;
     private creationDate: Date;
     private user: User;
     private thread: Thread;
 
     constructor(comment: {
-        id?: number;
-        title: string;
+        id: number;
         content: string;
         creationDate: Date;
         user: User;
@@ -19,7 +17,6 @@ export class Comment{
     }) {
         this.validate(comment);
         this.id = comment.id;
-        this.title = comment.title;
         this.content = comment.content;
         this.creationDate = comment.creationDate;
         this.user = comment.user;
@@ -27,16 +24,12 @@ export class Comment{
     }
 
     validate( comment: {
-        id?: number;
-        title: string;
+        id: number;
         content: string;
         creationDate: Date;
         user: User;
         thread: Thread;
     }) {
-        if (!comment.title?.trim()) {
-            throw new Error("Title is required");
-        }
         if (!comment.content?.trim()) {
             throw new Error("Content is required");
         }
@@ -60,13 +53,10 @@ export class Comment{
         }
     }
 
-    getId(): number | undefined {
+    getId(): number {
         return this.id;
     }
 
-    getTitle(): string {
-        return this.title;
-    }
 
     getContent(): string {
         return this.content;
@@ -86,10 +76,6 @@ export class Comment{
 
     setId(id: number): void {
         this.id = id;
-    }
-
-    setTitle(title: string): void {
-        this.title = title;
     }
 
     setContent(content: string): void {
