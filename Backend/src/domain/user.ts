@@ -75,4 +75,10 @@ export class User {
   getReputation(): Level {
     return this.reputation;
   }
+
+  validatePassword(password: string) {
+    if (this.password !== password) {
+      throw new Error("Invalid password");
+    }
+  }
 }
