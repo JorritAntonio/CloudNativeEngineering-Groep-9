@@ -16,5 +16,5 @@
         "name": "res"
       }
     ],
-    "scriptFile": "../dist/RegisterUserHttpTrigger/index.js"
+    "scriptFile": "../dist/RegisterUserHttpTrigger/index.ts"
   }
