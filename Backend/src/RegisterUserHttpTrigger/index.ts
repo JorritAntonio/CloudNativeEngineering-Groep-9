@@ -6,7 +6,7 @@ import {
 } from "@azure/functions";
 import { UserService } from "../service/user.service";
 import { unauthenticatedRouteWrapper } from "../helpers/function-wrapper";
-const registerUser: AzureFunction = async (context: Context, req: HttpRequest): Promise<void> => {
+const httpTrigger: AzureFunction = async (context: Context, req: HttpRequest): Promise<void> => {
   await unauthenticatedRouteWrapper(async () => {
     context.log("HTTP trigger function processed a request.");
     if (!req.body || !req.body.email || !req.body.password || !req.body.username) {
@@ -27,4 +27,4 @@ const registerUser: AzureFunction = async (context: Context, req: HttpRequest): 
   }, context);
 };
 
-export default registerUser;
+export default httpTrigger;
