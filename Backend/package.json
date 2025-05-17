@@ -1,11 +1,13 @@
 {
   "name": "cne-project-backend",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
     "build": "tsc",
-    "serve": "node dist/index.js"
+    "watch": "tsc -w",
+    "clean": "rimraf dist",
+    "prestart": "npm run clean && npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
   },
   "keywords": [],
   "author": "",
