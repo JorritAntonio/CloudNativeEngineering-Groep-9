@@ -2,6 +2,9 @@ import { Container, CosmosClient } from "@azure/cosmos";
 import { Comment } from "../domain/comment";
 import { UserRepository } from "./user.db";
 import { ThreadRepository } from "./thread.db";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 // Dit is het model van de Comment CosmosObject
 // Deze krijg je als je een object oproept vanuit de databank
@@ -166,7 +169,7 @@ export class CommentRepository {
       thread: comment.getThread().getId(),
     });
 
-    if (result && result.statusCode == 200) {
+    if (result && result.statusCode >= 200 && result.statusCode < 400) {
       return this.findCommentById(id.toString());
     } else {
       throw new Error("Could not create comment.");

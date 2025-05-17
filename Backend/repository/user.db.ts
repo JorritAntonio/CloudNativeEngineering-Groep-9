@@ -1,5 +1,8 @@
 import { User } from "../domain/user";
 import { Container, CosmosClient } from "@azure/cosmos";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 // Dit is het model van de User CosmosObject
 // Deze krijg je als je een object oproept vanuit de databank
@@ -145,10 +148,10 @@ export class UserRepository {
       reputation: user.getReputation(),
     });
 
-    if (result && result.statusCode == 200) {
+    if (result && result.statusCode >= 200 && result.statusCode < 400) {
       return this.findUserByEmail(user.getEmail());
     } else {
-      throw new Error("Could not create user.");
+      throw new Error(`Could not create user.`);
     }
   };
 
