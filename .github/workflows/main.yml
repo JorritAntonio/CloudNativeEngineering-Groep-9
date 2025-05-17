@@ -50,12 +50,6 @@ jobs:
         shell: pwsh
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          "@'
-          COSMOS_KEY=${{ secrets.COSMOS_KEY }}
-          COSMOS_ENDPOINT=${{ secrets.COSMOS_ENDPOINT }}
-          COSMOS_DATABASE_NAME=${{ secrets.COSMOS_DATABASE_NAME }}
-          '@ | Out-File -Encoding UTF8 -FilePath .env"
-
           npm install
           npm run build --if-present
           npm run test --if-present
