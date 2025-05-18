@@ -1,6 +1,9 @@
+import UserService from "@/services/UserService";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 const LoginForm: React.FC = () => {
+    const router = useRouter();
     // Fields
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -19,12 +22,30 @@ const LoginForm: React.FC = () => {
         return result;
     }
 
-    const login = (event: FormEvent) => {
+    const login = async(event: FormEvent) => {
         event.preventDefault();
 
         setError("");
 
         if (!validate()) return;
+
+        const authResponse = await UserService.logIn({email, password});
+
+        if (authResponse && authResponse.token) {
+            localStorage.setItem("loggedInUser", JSON.stringify({
+                token: authResponse.token,
+                username: authResponse.username
+            }));
+            setSuccess("Successfully logged in, transferring you to home page in 2 seconds")
+            setTimeout(() => {
+                setSuccess("Successfully logged in, transferring you to home page in 1 second")
+            }, 1000);
+            setTimeout(()=> {
+                router.push('/');
+            }, 2000);
+        } else {
+            setError("An error has occured...")
+        }
     }
 
     return (
@@ -67,6 +88,7 @@ const LoginForm: React.FC = () => {
                 >
                     Log in
                 </button>
+                {success && <p className="text-green-400">{success}</p>}
                 {error && <p className="text-red-500">{error}</p>}
             </form>
         </div>
