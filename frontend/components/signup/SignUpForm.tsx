@@ -2,9 +2,10 @@ import UserService from "@/services/UserService";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
-const LoginForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
     const router = useRouter();
     // Fields
+    const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -14,7 +15,7 @@ const LoginForm: React.FC = () => {
 
     const validate = (): boolean => {
         let result = true;
-        if (!email.trim() || !password.trim()) {
+        if (!email.trim() || !password.trim() || !username.trim()) {
             setError("All fields must be filled");
             result = false;
         }
@@ -22,14 +23,14 @@ const LoginForm: React.FC = () => {
         return result;
     }
 
-    const login = async(event: FormEvent) => {
+    const signup = async(event: FormEvent) => {
         event.preventDefault();
 
         setError("");
 
         if (!validate()) return;
 
-        const authResponse = await UserService.logIn({email, password});
+        const authResponse = await UserService.signUp({username, email, password});
 
         if (authResponse && authResponse.token) {
             localStorage.setItem("loggedInUser", JSON.stringify({
@@ -52,8 +53,21 @@ const LoginForm: React.FC = () => {
     <>
     <div className="flex items-center justify-center min-h-screen">
         <div className="max-w-sm w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-            <h1 className="text-xl font-semibold mb-6">Log in to your account</h1>
-            <form onSubmit={(e) => login(e)} className="space-y-4">
+            <h1 className="text-xl font-semibold mb-6">Sign up for an account</h1>
+            <form onSubmit={(e) => signup(e)} className="space-y-4">
+                <div>
+                    <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+                        Username
+                    </label>
+                    <input
+                        type="username"
+                        id="username"
+                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                         Email
@@ -86,7 +100,7 @@ const LoginForm: React.FC = () => {
                     type="submit"
                     className="w-full py-2 px-4 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600 transition-colors"
                 >
-                    Log in
+                    Sign up
                 </button>
                 {success && <p className="text-green-400">{success}</p>}
                 {error && <p className="text-red-500">{error}</p>}
@@ -97,4 +111,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

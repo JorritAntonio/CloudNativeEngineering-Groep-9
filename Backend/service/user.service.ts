@@ -1,6 +1,8 @@
+import * as bcrypt from 'bcrypt'
 import { hash } from "../domain/hash";
 import { User } from "../domain/user";
 import { UserRepository } from "../repository/user.db";
+import generateJwtToken from "../utils/jwt";
 
 export class UserService {
   private static instance: UserService;
@@ -42,7 +44,35 @@ export class UserService {
       role: "user",
       reputation: "Beginner",
     });
-    return (await this.getRepo()).createUser(user);
+
+    (await this.getRepo()).createUser(user)
+
+    const session_response = {
+      token: generateJwtToken(username),
+      username: username
+    }
+    
+    return session_response;
+  }
+
+    async login(email: string, password: string) {
+
+    if (!(await (await this.getRepo()).userExists(email))) {
+      throw new Error("A user does not exist with this email");
+    }
+
+    const user = await (await this.getRepo()).findUserByEmail(email);
+
+    if (!(await bcrypt.compare(password, user.getPassword()))) {
+      throw new Error("Wrong password")
+    }
+
+    const session_response = {
+      token: generateJwtToken(user.getUsername()),
+      username: user.getUsername()
+    }
+    
+    return session_response;
   }
 
   async findUserByEmail(email: string) {
