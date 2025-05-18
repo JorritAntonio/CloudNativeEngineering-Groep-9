@@ -15,11 +15,11 @@ const httpTrigger: AzureFunction = async (context: Context, req: HttpRequest): P
 
     const { username, email, password } = req.body;
 
-    await UserService.getInstance().addUser(username, email, password);
+    const sesssion_response = await UserService.getInstance().addUser(username, email, password);
 
     context.res = {
       status: 201,
-      body: { email, username },
+      body: sesssion_response,
       headers: {
         "Content-Type": "application/json",
       },

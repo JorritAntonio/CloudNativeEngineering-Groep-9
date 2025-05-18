@@ -1,6 +1,7 @@
 import { hash } from "../domain/hash";
 import { User } from "../domain/user";
 import { UserRepository } from "../repository/user.db";
+import generateJwtToken from "../utils/jwt";
 
 export class UserService {
   private static instance: UserService;
@@ -42,7 +43,15 @@ export class UserService {
       role: "user",
       reputation: "Beginner",
     });
-    return (await this.getRepo()).createUser(user);
+
+    (await this.getRepo()).createUser(user)
+
+    const session_response = {
+      token: generateJwtToken(username),
+      username: username
+    }
+    
+    return session_response;
   }
 
   async findUserByEmail(email: string) {
