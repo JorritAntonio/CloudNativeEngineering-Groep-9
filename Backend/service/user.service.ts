@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcryptjs'
 import { hash } from "../domain/hash";
 import { User } from "../domain/user";
 import { UserRepository } from "../repository/user.db";
