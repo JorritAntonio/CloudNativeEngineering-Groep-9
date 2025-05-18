@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Header: React.FC = () => {
@@ -29,7 +30,7 @@ const Header: React.FC = () => {
 
         {/* Auth Links */}
         <div className="flex items-center gap-2 text-sm">
-          <a href="#" className="px-3 py-1 border border-orange-500 text-orange-500 rounded hover:bg-orange-50">Log in</a>
+          <Link href={"/login"} className="px-3 py-1 border border-orange-500 text-orange-500 rounded hover:bg-orange-50">Log in</Link>
           <a href="#" className="px-3 py-1 bg-orange-500 text-white rounded hover:bg-orange-600">Sign up</a>
         </div>
       </div>
