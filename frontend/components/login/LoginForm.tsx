@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const LoginForm: React.FC = () => {
     // Fields
@@ -6,26 +6,33 @@ const LoginForm: React.FC = () => {
     const [password, setPassword] = useState<string>("");
 
     // Status messages
-    const [errors, setErrors] = useState<string[]>([]);
+    const [error, setError] = useState<string>();
     const [success, setSuccess] = useState<string>("");
 
     const validate = (): boolean => {
         let result = true;
         if (!email.trim() || !password.trim()) {
-            setErrors([... "All fields must be filled"])
+            setError("All fields must be filled");
             result = false;
         }
 
         return result;
     }
 
+    const login = (event: FormEvent) => {
+        event.preventDefault();
+
+        setError("");
+
+        if (!validate()) return;
+    }
 
     return (
     <>
     <div className="flex items-center justify-center min-h-screen">
         <div className="max-w-sm w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
             <h1 className="text-xl font-semibold mb-6">Log in to your account</h1>
-            <form className="space-y-4">
+            <form onSubmit={(e) => login(e)} className="space-y-4">
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                         Email
@@ -60,6 +67,7 @@ const LoginForm: React.FC = () => {
                 >
                     Log in
                 </button>
+                {error && <p className="text-red-500">{error}</p>}
             </form>
         </div>
     </div>

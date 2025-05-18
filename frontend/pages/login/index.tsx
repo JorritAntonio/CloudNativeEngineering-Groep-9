@@ -4,6 +4,7 @@ import LoginForm from "@/components/login/LoginForm";
 const Login: React.FC = () => {
 
     return <>
+        <title>Log in - BadOverflow</title>
         <Header/>
         <LoginForm/>
     </>
