@@ -10,3 +10,9 @@ type User = {
     role: Role,
     reputation: Level,
 }
+
+type Thread = {
+    title: string;
+    content: string;
+    username: string;
+}

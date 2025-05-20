@@ -7,15 +7,11 @@ import {
 import { ThreadService } from "../service/thread.service";
 import { unauthenticatedRouteWrapper } from "../helpers/function-wrapper";
 
-interface ThreadDTO{
-    title: string;
-    content: string;
-    username: string;
-}
+
 
 const httpTrigger: AzureFunction = async (context: Context, req: HttpRequest): Promise<void> => {
   await unauthenticatedRouteWrapper(async () => {
-    const body = req.body as ThreadDTO;
+    const body = req.body as Thread;
     if (!body?.title || !body?.content || !body.username) {
       throw new Error("Missing title, content or username");
     }
