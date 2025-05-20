@@ -8,3 +8,9 @@ export type User = {
     email?: string,
     password?: string
 }
+
+export type Thread = {
+    title?: string,
+    content?: string,
+    username?: string,
+}
