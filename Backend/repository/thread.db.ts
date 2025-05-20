@@ -14,6 +14,7 @@ dotenv.config();
 interface CosmosThreadDocument {
   id: string;
   title: string;
+  content: string;
   creationDate: Date;
   createdBy: string; // Dit is een string omdat ik een ID opsla ipv het volledig user Object
   comments: string[]; // Dit is een lijst van strings (lijst van ids)
@@ -88,6 +89,7 @@ export class ThreadRepository {
     return new Thread({
       id: parseInt(threadDocument.id),
       title: threadDocument.title,
+      content: threadDocument.content,
       creationDate: threadDocument.creationDate,
       createdBy: user,
       comments: comments,
@@ -157,6 +159,7 @@ export class ThreadRepository {
     const result = await this.container.items.create({
       id: id.toString(),
       title: thread.getTitle(),
+      content: thread.getContent(),
       creationDate: thread.getCreationDate(),
       createdBy: thread.getCreatedBy().getId(),
       comments: thread.getComments().map((comment) => comment.getId()),
