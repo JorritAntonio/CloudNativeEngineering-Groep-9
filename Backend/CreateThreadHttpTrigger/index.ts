@@ -7,8 +7,6 @@ import {
 import { ThreadService } from "../service/thread.service";
 import { unauthenticatedRouteWrapper } from "../helpers/function-wrapper";
 
-
-
 const httpTrigger: AzureFunction = async (context: Context, req: HttpRequest): Promise<void> => {
   await unauthenticatedRouteWrapper(async () => {
     const body = req.body as Thread;
