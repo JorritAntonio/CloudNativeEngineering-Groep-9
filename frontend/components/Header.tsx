@@ -25,7 +25,7 @@ const Header: React.FC = () => {
               onClick={() => router.push("/")}
             />
             <a href="/" className="text-xl font-semibold text-orange-500">
-              BadddddOverflowwww
+              BadOverflow
             </a>
           </div>
           {/* Nav Links */}
