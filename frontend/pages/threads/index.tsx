@@ -1,13 +1,12 @@
 import Header from "@/components/Header";
-import CreateThreadForm from "@/components/thread/threadCreateForm";
+import ThreadsOverview from "@/components/thread/ThreadsOverview";
 
-const CreateThreadPage: React.FC = () => {
-
+const Threads: React.FC = () => {
     return <>
-        <title> Thread </title>
-        <Header/>
-        <CreateThreadForm/>
+    <title>Threads | BadOverflow</title>
+    <Header/>
+    <ThreadsOverview/>
     </>
 }
 
-export default CreateThreadPage;
+export default Threads;

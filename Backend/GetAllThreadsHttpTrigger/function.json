@@ -5,8 +5,8 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": [ "post" ],
-      "route": "threads/create"
+      "methods": [ "get" ],
+      "route": "threads"
     },
     {
       "type": "http",
@@ -14,5 +14,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/CreateThreadHttpTrigger/index.js"
+  "scriptFile": "../dist/GetAllThreadsHttpTrigger/index.js"
 }

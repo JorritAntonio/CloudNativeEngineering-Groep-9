@@ -10,6 +10,7 @@ export type User = {
 }
 
 export type Thread = {
+    id?: number,
     title?: string,
     content?: string,
     username?: string,

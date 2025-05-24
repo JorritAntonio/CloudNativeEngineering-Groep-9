@@ -15,14 +15,16 @@ const CreateThreadForm: React.FC = () => {
     setLoading(true);
 
     try {
-        const token = localStorage.getItem("token");
+        const token = JSON.parse(localStorage.getItem("loggedInUser") as string).token;
         if (!token) throw new Error("Not authenticated");
 
-        const username = localStorage.getItem("username");
+        const username = JSON.parse(localStorage.getItem("loggedInUser") as string).username;
         if (!username) throw new Error("Username missing");
 
         const created = await ThreadService.createThread({title, content, username});
 
+        
+        
         router.push(`/threads/${created.id}`);
     } catch (err: any) {
       setError(err.message);

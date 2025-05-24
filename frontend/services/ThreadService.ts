@@ -2,7 +2,7 @@ import { Thread } from "@/types/types"
 
 const createThread = async (thread: Thread) => {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/thread`, {
+        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -13,8 +13,20 @@ const createThread = async (thread: Thread) => {
     } catch (error) {
         console.error('Error creating a user:', error);
     }
-} 
+}
 
- 
+const getAllThreads = async(): Promise<Thread[] | undefined> => {
+    try {
+        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        return await res.json();
+    } catch (error) {
+        console.error('Error creating a user:', error);
+    }
+}
 
-export default { createThread };
+export default { createThread, getAllThreads };
