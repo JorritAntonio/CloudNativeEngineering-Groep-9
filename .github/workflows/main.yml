@@ -18,21 +18,21 @@ env:
   NODE_VERSION: "20.x" # set this to the node version to use (e.g. '8.x', '10.x', '12.x')
 
 jobs:
-  # upload-site:
-  #   runs-on: ubuntu-latest
+  upload-site:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   - name: Checkout Repository
-  #     uses: actions/checkout@v2
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-  #   - name: Run Upload Script
-  #     run: |
-  #       chmod +x ./upload-site.sh
-  #       ./upload-site.sh
-  #     env:
-  #       AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
-  #       AZURE_STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
-  #       AZURE_STORAGE_SAS_TOKEN: ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
+    - name: Run Upload Script
+      run: |
+        chmod +x ./upload-site.sh
+        ./upload-site.sh
+      env:
+        AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+        AZURE_STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
+        AZURE_STORAGE_SAS_TOKEN: ${{ secrets.AZURE_STORAGE_SAS_TOKEN }}
 
   build-and-deploy-functions:
     runs-on: windows-latest
