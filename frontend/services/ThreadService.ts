@@ -1,17 +1,18 @@
 import { Thread } from "@/types/types"
 
 const createThread = async (thread: Thread) => {
+    console.log(thread)
     try {
         const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({thread})
+            body: JSON.stringify(thread)
         });
         return await res.json();
     } catch (error) {
-        console.error('Error creating a user:', error);
+        console.error('Error creating a thread:', error);
     }
 }
 
