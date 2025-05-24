@@ -1,5 +1,5 @@
 import { AuthenticationResponse, User } from "@/types/types";
-const host = "https://cne-groep9-function-app.azurewebsites.net";
+const host = process.env.NEXT_PUBLIC_API_URL;
 
 const signUp = async (
   user: User
