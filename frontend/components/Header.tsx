@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           </div>
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700">
-            <a href="#" className="hover:text-black">Questions</a>
+            <a href="#" className="hover:text-black">Questionsssssss</a>
             <a href="#" className="hover:text-black">Tags</a>
             <a href="#" className="hover:text-black">Users</a>
             <a href="#" className="hover:text-black">Companies</a>
