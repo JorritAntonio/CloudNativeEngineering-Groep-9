@@ -63,7 +63,6 @@ export class UserRepository {
   // Jij kan het vergelijken met de User.from() functie van bij prisma.
   toUser = (userDocument: CosmosUserDocument): User => {
     return new User({
-      id: parseInt(userDocument.id),
       username: userDocument.username,
       email: userDocument.email,
       password: userDocument.password,
@@ -139,7 +138,6 @@ export class UserRepository {
 
     // De user wordt hier aangemaakt met de items.create({}) functie
     const result = await this.container.items.create({
-      id: id.toString(),
       username: user.getUsername(),
       email: user.getEmail(),
       password: user.getPassword(),
