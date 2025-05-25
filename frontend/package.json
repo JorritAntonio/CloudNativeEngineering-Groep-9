@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
+    "export": "next export",
     "start": "npm run dev"
   },
   "dependencies": {
