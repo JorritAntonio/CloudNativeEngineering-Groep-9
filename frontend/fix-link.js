@@ -16,8 +16,8 @@ function updateLinks(filePath) {
 
 // Loop through all HTML files in the output directory
 fs.readdirSync(dir).forEach((file) => {
-  console.log(`Checking: ${fullPath}`);
   const fullPath = path.join(dir, file);
+  console.log(`Checking: ${fullPath}`);
   if (fs.statSync(fullPath).isFile() && file.endsWith('.html')) {
     updateLinks(fullPath);
   }
