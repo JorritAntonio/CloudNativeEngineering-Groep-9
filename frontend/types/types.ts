@@ -15,7 +15,7 @@ export type Thread = {
     content?: string;
     username?: string;
     createdBy?: User;
-    comments: Comment[];
+    comments?: Comment[];
 }
 
 export type Comment = {
