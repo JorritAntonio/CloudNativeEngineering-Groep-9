@@ -1,9 +1,13 @@
 import { Thread } from "@/types/types"
 
+const host =
+  process.env.NEXT_PUBLIC_API_URL ??
+  "https://cne-groep9-function-app.azurewebsites.net";
+
 const createThread = async (thread: Thread) => {
     console.log(thread)
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads/create`, {
+        const res = await fetch(host + `/api/threads/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -18,7 +22,7 @@ const createThread = async (thread: Thread) => {
 
 const getAllThreads = async(): Promise<Thread[] | undefined> => {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads`, {
+        const res = await fetch(host + `/api/threads`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +36,7 @@ const getAllThreads = async(): Promise<Thread[] | undefined> => {
 
 const getThreadById = async(threadId: string): Promise<Thread | undefined> => {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads/${threadId}`, 
+        const res = await fetch(host + `/api/threads/${threadId}`, 
             {
                 method: "GET",
                 headers: {

@@ -1,8 +1,12 @@
 import {Comment} from "@/types/types"
 
+const host =
+  process.env.NEXT_PUBLIC_API_URL ??
+  "https://cne-groep9-function-app.azurewebsites.net";
+
 const getCommentsByThreadId = async (threadId: number): Promise<Comment[] | undefined> => {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads/${threadId}/comments`,
+        const res = await fetch(host + `/api/threads/${threadId}/comments`,
             {
                 method: "GET",
                 headers:{
