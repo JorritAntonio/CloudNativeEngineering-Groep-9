@@ -39,7 +39,7 @@ const SingleThreadOverview: React.FC<Props> = ({ thread }: Props) => {
               <li key={comment.id} className="border-b pb-2">
                 <div className="text-gray-800">{comment.content}</div>
                 <div className="text-xs text-gray-500 mt-1">
-                  by {comment.createdBy?.user.username}
+                  by {comment.user.username}
                 </div>
               </li>
             ))}
