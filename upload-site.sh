@@ -6,7 +6,7 @@ container_name="$AZURE_STORAGE_CONTAINER"
 sas_token="$AZURE_STORAGE_SAS_TOKEN"
 
 # Set the local folder path
-local_folder="frontend/out"
+local_folder="frontend/.next"
 
 # Run link fix script before upload
 node frontend/fix-link.js
