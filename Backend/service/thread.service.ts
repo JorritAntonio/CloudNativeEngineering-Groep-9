@@ -1,6 +1,7 @@
 import { Thread }       from "../domain/thread";
 import { UserRepository }   from "../repository/user.db";
 import { ThreadRepository } from "../repository/thread.db";
+import { Comment } from "../domain/comment";
 
 
 export class ThreadService {
@@ -48,4 +49,29 @@ export class ThreadService {
     });
     return (await this.getThreadRepo()).createThread(newThread);
   }
+  
+  async createCommentOnThread( username: string, content: string, threadId: string): Promise<Thread> {
+    const user = await (await this.getUserRepo()).findUserByUsername(username);
+    const thread = await (await this.getThreadRepo()).findThreadById(threadId);
+    if (!user){
+        throw new Error("User does not exist!");
+    }
+
+    if (!thread) {
+      throw new Error("This thread does not exist");
+    }
+
+    if (!content){
+        throw new Error("A thread must have content!")
+    }
+
+
+    const newComment = new Comment({
+        content,
+        creationDate: new Date(),
+        user: user
+    });
+    return (await this.getThreadRepo()).createCommentOnThread(newComment, thread);
+  }
+
 }

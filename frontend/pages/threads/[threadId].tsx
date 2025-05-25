@@ -10,10 +10,7 @@ const ThreadPage: React.FC = () => {
   const { threadId } = router.query;
 
   const fetch = async () => {
-    if (typeof threadId === 'string') {
-      return await ThreadService.getThreadById(threadId);
-    }
-    return undefined;
+      return await ThreadService.getThreadById(threadId as string);
   };
 
   const { data: thread, error, isLoading } = useSWR(

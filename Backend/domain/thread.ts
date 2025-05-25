@@ -42,6 +42,7 @@ export class Thread{
         if (!thread.creationDate) {
             throw new Error("Creation date is required");
         }
+
         if (!thread.createdBy) {
             throw new Error("User is required");
         }

@@ -1,18 +1,27 @@
 export type AuthenticationResponse = {
-    token: string,
-    username: string
+    token: string;
+    username: string;
 }
 
 export type User = {
-    username?: string,
-    email?: string,
-    password?: string
+    username?: string;
+    email?: string;
+    password?: string;
 }
 
 export type Thread = {
-    id?: number,
-    title?: string,
-    content?: string,
-    username?: string,
-    createdBy?: User
+    id?: number;
+    title?: string;
+    content?: string;
+    username?: string;
+    createdBy?: User;
+    comments: Comment[];
+}
+
+export type Comment = {
+    id?: number;
+    content: string;
+    creationDate: Date;
+    user: User;
+    thread: Thread;
 }

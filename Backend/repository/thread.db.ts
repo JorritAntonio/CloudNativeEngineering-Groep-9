@@ -3,7 +3,6 @@ import { User } from "../domain/user";
 import { Comment } from "../domain/comment";
 import { Container, CosmosClient } from "@azure/cosmos";
 import { UserRepository } from "./user.db";
-import { CommentRepository } from "./comment.db";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -17,7 +16,7 @@ interface CosmosThreadDocument {
   content: string;
   creationDate: Date;
   createdBy: string; // Dit is een string omdat ik een ID opsla ipv het volledig user Object
-  comments: string[]; // Dit is een lijst van strings (lijst van ids)
+  comments: Comment[]; // Dit is een lijst van strings (lijst van ids)
 }
 
 export class ThreadRepository {
@@ -69,16 +68,10 @@ export class ThreadRepository {
     // Zelfde voor de comments, het is een lijst van commentIds, die moet ik dus allemaal fetchen
     // Hier maak ik instanties aan van de User- en CommentRepositories
     const userRepository = await UserRepository.getInstance();
-    const commentRepository = await CommentRepository.getInstance();
 
 
     // Ik fetch de user en alle comments
     const user = await userRepository.findUserByUsername(threadDocument.createdBy);
-    const comments = await Promise.all(
-      threadDocument.comments.map((commentId) =>
-        commentRepository.findCommentById(commentId),
-      ),
-    );
 
     if (!user) {
       throw new Error(
@@ -93,7 +86,7 @@ export class ThreadRepository {
       content: threadDocument.content,
       creationDate: threadDocument.creationDate,
       createdBy: user,
-      comments: comments,
+      comments: threadDocument.comments,
     });
   };
 
@@ -163,7 +156,7 @@ export class ThreadRepository {
       content: thread.getContent(),
       creationDate: thread.getCreationDate(),
       createdBy: thread.getCreatedBy().getUsername(),
-      comments: thread.getComments().map((comment) => comment.getId()),
+      comments: thread.getComments(),
     });
 
     if (result && result.statusCode >= 200 && result.statusCode < 400) {
@@ -172,4 +165,24 @@ export class ThreadRepository {
       throw new Error("Could not create thread.");
     }
   };
+
+  createCommentOnThread = async(comment: Comment, thread: Thread): Promise<Thread> => {
+    const threadId = thread.getId().toString();
+    const { resource: threadDoc } = await this.container.item(threadId, undefined).read<CosmosThreadDocument>();
+
+    if (!threadDoc) {
+      throw new Error("Thread not found.");
+    }
+
+    // Voeg de comment toe aan de lijst van comments
+    const updatedComments = [...(threadDoc.comments || []), comment];
+
+    // Update het thread document in de database
+    await this.container
+      .item(threadId, undefined)
+      .replace({ ...threadDoc, comments: updatedComments });
+
+    // Geef de geüpdatete thread terug
+    return this.findThreadById(threadId);
+  }
 }
