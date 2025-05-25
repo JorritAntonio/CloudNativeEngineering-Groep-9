@@ -30,4 +30,20 @@ const getAllThreads = async(): Promise<Thread[] | undefined> => {
     }
 }
 
-export default { createThread, getAllThreads };
+const getThreadById = async(threadId: string): Promise<Thread | undefined> => {
+    try {
+        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/threads/${threadId}`, 
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }
+        );
+        return await res.json();
+    } catch (error) {
+        console.error("Error fetching thread by id: ", error);
+    }
+}
+
+export default { createThread, getAllThreads, getThreadById };

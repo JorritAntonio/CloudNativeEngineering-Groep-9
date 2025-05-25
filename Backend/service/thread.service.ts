@@ -20,6 +20,10 @@ export class ThreadService {
     return (await this.getThreadRepo()).getAllThreads();
   }
 
+  async getThreadById(threadId: string): Promise<Thread> {
+    return (await this.getThreadRepo()).findThreadById(threadId);
+  }
+
   async createThread( username: string, title: string, content: string): Promise<Thread> {
     const user = await (await this.getUserRepo()).findUserByUsername(username);
     if (!user){

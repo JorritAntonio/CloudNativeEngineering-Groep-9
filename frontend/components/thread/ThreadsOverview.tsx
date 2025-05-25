@@ -14,20 +14,25 @@ const ThreadsOverview: React.FC = () => {
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">
         <h1 className="text-2xl font-semibold mb-6">All Questions</h1>
-
-        <div className="space-y-4">
+        
+        <div className="space-y-4 justify-between">
+            <button
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                    onClick={() => router.push("/threads/create")}
+            >
+                Create Thread
+            </button>
             {isLoading && <p>is Loading</p>}
             {error && <p>{error}</p>}
             {data && data.map((thread, index) => (
             <div
                 key={index}
                 className="p-4 border border-gray-300 bg-white rounded-md hover:shadow-sm transition-shadow"
-                onClick={() => router.push(`/thread/${thread.id}`)}
             >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                 <div className="md:mr-4">
                     <a
-                    href="#"
+                    href={`/threads/${thread.id}`}
                     className="text-blue-700 text-lg font-medium hover:text-blue-500"
                     >
                     {thread.title}
