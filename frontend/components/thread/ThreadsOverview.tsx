@@ -21,13 +21,74 @@ const ThreadsOverview: React.FC = () => {
         <h1 className="text-2xl font-semibold mb-6">All Questions</h1>
         
         <div className="space-y-4 justify-between">
-            <button
+            {!isLoading && <button
                     className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
                     onClick={() => router.push("/threads/create")}
             >
                 Create Thread
-            </button>
-            {isLoading && <p>is Loading</p>}
+            </button>}
+            {isLoading && <div className="flex justify-center items-center py-8">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 240 240"
+                    className="w-24 h-12"
+                >
+                    <circle
+                        fill="#FFC84C"
+                        stroke="#FFC84C"
+                        strokeWidth="2"
+                        r="22"
+                        cx="60"
+                        cy="90"
+                    >
+                        <animate
+                            attributeName="cy"
+                            calcMode="spline"
+                            dur="2.8s"
+                            values="90;180;90;"
+                            keySplines=".5 0 .5 1;.5 0 .5 1"
+                            repeatCount="indefinite"
+                            begin="-.4s"
+                        />
+                    </circle>
+                    <circle
+                        fill="#FFC84C"
+                        stroke="#FFC84C"
+                        strokeWidth="2"
+                        r="22"
+                        cx="120"
+                        cy="90"
+                    >
+                        <animate
+                            attributeName="cy"
+                            calcMode="spline"
+                            dur="2.8s"
+                            values="90;180;90;"
+                            keySplines=".5 0 .5 1;.5 0 .5 1"
+                            repeatCount="indefinite"
+                            begin="-.2s"
+                        />
+                    </circle>
+                    <circle
+                        fill="#FFC84C"
+                        stroke="#FFC84C"
+                        strokeWidth="2"
+                        r="22"
+                        cx="180"
+                        cy="90"
+                    >
+                        <animate
+                            attributeName="cy"
+                            calcMode="spline"
+                            dur="2.8s"
+                            values="90;180;90;"
+                            keySplines=".5 0 .5 1;.5 0 .5 1"
+                            repeatCount="indefinite"
+                            begin="0s"
+                        />
+                    </circle>
+                </svg>
+            </div>}
             {error && <p>{error}</p>}
             {data && data.map((thread, index) => (
                 <div
