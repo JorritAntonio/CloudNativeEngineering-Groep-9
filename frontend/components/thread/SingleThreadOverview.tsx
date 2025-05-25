@@ -1,8 +1,5 @@
 import React from 'react';
-import useSWR from 'swr';
-import ThreadService from '@/services/ThreadService';
 import { Thread } from '@/types/types';
-import SingleThreadCommentsOverview from './SingleThreadCommentsOverview';
 
 type Props = {
   thread: Thread | undefined;
