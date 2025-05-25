@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -14,9 +14,10 @@ const Header: React.FC = () => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
   }, []);
 
-  useEffect(() => {
-    router.push(`?search=${searchFilter}`)
-  },[searchFilter])
+  const handleSearch = (event: FormEvent) => {
+      event.preventDefault()
+      router.push(`/threads?search=${searchFilter}`);
+  };
 
   return (
     <header className="w-full fixed top-0 z-50 bg-white border-b shadow-sm">
@@ -45,7 +46,7 @@ const Header: React.FC = () => {
 
         {/* Search Bar */}
         <div className="flex-1 max-w-xl mx-4 hidden sm:flex">
-          <div className="relative w-full">
+          <form className="relative w-full" onSubmit={(e) => handleSearch(e)}>
             <input
               type="text"
               placeholder="Search…"
@@ -53,7 +54,7 @@ const Header: React.FC = () => {
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
             />
-          </div>
+          </form>
         </div>
 
         {/* Auth Links */}
