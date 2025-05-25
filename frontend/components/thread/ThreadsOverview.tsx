@@ -1,7 +1,9 @@
 import ThreadService from "@/services/ThreadService";
+import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 
 const ThreadsOverview: React.FC = () => {
+    const router = useRouter();
 
     const fetchThreads = async() => {
         return await ThreadService.getAllThreads();
@@ -20,6 +22,7 @@ const ThreadsOverview: React.FC = () => {
             <div
                 key={index}
                 className="p-4 border border-gray-300 bg-white rounded-md hover:shadow-sm transition-shadow"
+                onClick={() => router.push(`/thread/${thread.id}`)}
             >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                 <div className="md:mr-4">
@@ -34,7 +37,7 @@ const ThreadsOverview: React.FC = () => {
                     </p>
                 </div>
                 <div className="text-sm text-gray-500 mt-2 md:mt-0 md:ml-4 whitespace-nowrap">
-                    asked by <span className="text-gray-800">{thread.username}</span>
+                    asked by <span className="text-gray-800">{thread.createdBy?.username}</span>
                 </div>
                 </div>
             </div>

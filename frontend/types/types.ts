@@ -14,4 +14,5 @@ export type Thread = {
     title?: string,
     content?: string,
     username?: string,
+    createdBy?: User
 }
