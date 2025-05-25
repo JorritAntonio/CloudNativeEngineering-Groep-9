@@ -42,14 +42,8 @@ export class Thread{
         if (!thread.creationDate) {
             throw new Error("Creation date is required");
         }
-        if (thread.creationDate.getTime() > Date.now()) {
-            throw new Error("Invalid date");
-        }
         if (!thread.createdBy) {
             throw new Error("User is required");
-        }
-        if (thread.createdBy.getId() === undefined) {
-            throw new Error("Invalid user");
         }
     }
     getId(): number | undefined {

@@ -34,6 +34,7 @@ export class ThreadService {
         throw new Error("A thread must have content!")
     }
 
+
     const newThread = new Thread({
         title,
         content,
@@ -41,7 +42,6 @@ export class ThreadService {
         createdBy: user,
         comments: []
     });
-
     return (await this.getThreadRepo()).createThread(newThread);
   }
 }

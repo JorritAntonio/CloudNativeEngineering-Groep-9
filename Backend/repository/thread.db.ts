@@ -71,8 +71,9 @@ export class ThreadRepository {
     const userRepository = await UserRepository.getInstance();
     const commentRepository = await CommentRepository.getInstance();
 
+
     // Ik fetch de user en alle comments
-    const user = await userRepository.findUserById(parseInt(threadDocument.id));
+    const user = await userRepository.findUserByUsername(threadDocument.createdBy);
     const comments = await Promise.all(
       threadDocument.comments.map((commentId) =>
         commentRepository.findCommentById(commentId),
@@ -161,7 +162,7 @@ export class ThreadRepository {
       title: thread.getTitle(),
       content: thread.getContent(),
       creationDate: thread.getCreationDate(),
-      createdBy: thread.getCreatedBy().getId(),
+      createdBy: thread.getCreatedBy().getUsername(),
       comments: thread.getComments().map((comment) => comment.getId()),
     });
 
