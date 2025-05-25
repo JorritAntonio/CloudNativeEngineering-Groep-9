@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = './out';
+const dir = 'frontend/out';
 
 
 function updateLinks(filePath) {
