@@ -10,6 +10,8 @@ const ThreadsOverview: React.FC = () => {
 
     const [singleThread, setSingleThread] = useState<Thread | null>();
 
+    const {search} = router.query;
+
     const fetchThreads = async() => {
         return await ThreadService.getAllThreads();
     }
@@ -91,7 +93,8 @@ const ThreadsOverview: React.FC = () => {
             </div>}
             {error && <p>{error}</p>}
             {data && data.map((thread, index) => (
-                <div
+                <>
+                    {thread.title?.toLowerCase().match(search as string) && <div
                     key={index}
                     className={`p-4 border ${singleThread?.id === thread.id ? "border-blue-500" : "border-gray-300"} bg-white rounded-md hover:shadow-sm transition-shadow cursor-pointer`}
                     onClick={() =>
@@ -115,7 +118,8 @@ const ThreadsOverview: React.FC = () => {
                             asked by <span className="text-gray-800">{thread.createdBy?.username}</span>
                         </div>
                     </div>
-                </div>
+                </div>}
+                </>
             ))}
             {singleThread && <SingleThreadOverview thread={singleThread}/>}
         </div>

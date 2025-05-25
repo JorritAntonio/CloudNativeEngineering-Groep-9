@@ -8,9 +8,15 @@ const Header: React.FC = () => {
 
   const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
 
+  const [searchFilter, setSearchFilter] = useState<string>("");
+
   useEffect(() => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
   }, []);
+
+  useEffect(() => {
+    router.push(`?search=${searchFilter}`)
+  },[searchFilter])
 
   return (
     <header className="w-full fixed top-0 z-50 bg-white border-b shadow-sm">
@@ -44,6 +50,8 @@ const Header: React.FC = () => {
               type="text"
               placeholder="Search…"
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              value={searchFilter}
+              onChange={(e) => setSearchFilter(e.target.value)}
             />
           </div>
         </div>
