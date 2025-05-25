@@ -25,7 +25,7 @@ const CreateThreadForm: React.FC = () => {
 
         const created = await ThreadService.createThread({title, content, username});
         console.log(created.id)
-        router.push(`/threads/${created.id}`);
+        router.push(`/threads`);
     } catch (err: any) {
       setError(err.message);
     } finally {

@@ -25,3 +25,8 @@ export type Comment = {
     user: User;
     thread: Thread;
 }
+
+export type CommentInput = {
+    username: string,
+    content: string
+}

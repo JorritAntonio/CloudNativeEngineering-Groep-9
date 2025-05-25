@@ -1,4 +1,4 @@
-import { Thread } from "@/types/types"
+import { Thread, CommentInput } from "@/types/types"
 
 const host =
   process.env.NEXT_PUBLIC_API_URL ??
@@ -50,4 +50,19 @@ const getThreadById = async(threadId: string): Promise<Thread | undefined> => {
     }
 }
 
-export default { createThread, getAllThreads, getThreadById };
+const addCommentToThread = async(comment: CommentInput, threadId: number) => {
+        try {
+        const res = await fetch(host + `/api/comments/create/${threadId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(comment)
+        });
+        return await res.json();
+    } catch (error) {
+        console.error('Error creating a thread:', error);
+    }
+} 
+
+export default { createThread, getAllThreads, getThreadById, addCommentToThread };
