@@ -31,7 +31,7 @@ const Header: React.FC = () => {
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700">
             <a href="#" className="hover:text-black">
-              Questions
+              Questionss
             </a>
             <a href="#" className="hover:text-black">
               Tags

@@ -4,6 +4,7 @@ const path = require('path');
 
 const dir = './out';
 
+
 function updateLinks(filePath) {
   let content = fs.readFileSync(filePath, 'utf8');
 
@@ -15,6 +16,7 @@ function updateLinks(filePath) {
 
 // Loop through all HTML files in the output directory
 fs.readdirSync(dir).forEach((file) => {
+  console.log(`Checking: ${fullPath}`);
   const fullPath = path.join(dir, file);
   if (fs.statSync(fullPath).isFile() && file.endsWith('.html')) {
     updateLinks(fullPath);
