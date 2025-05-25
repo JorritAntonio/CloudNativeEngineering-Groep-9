@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     <header className="w-full fixed top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
         <div className="flex items-center gap-4">
-          <div className="flex items-center hover:bg-gray-200 hover:rounded hover:cursor-pointer">
+          <div className="flex items-center hover:bg-gray-200 hover:rounded hover:cursor-pointer p-1">
             <img
               src="/favicon.ico"
               alt="Main Logo"
@@ -30,10 +30,10 @@ const Header: React.FC = () => {
           </div>
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700">
-            <a href={"/threads"} className="hover:text-black">Threads</a>
-            <a href="#" className="hover:text-black">Tags</a>
-            <a href="#" className="hover:text-black">Users</a>
-            <a href="#" className="hover:text-black">Companies</a>
+            <a href={"/threads"} className="hover:text-black hover:bg-gray-200 hover:rounded p-1">Threads</a>
+            <a href="#" className="hover:text-black hover:bg-gray-200 hover:rounded p-1">Tags</a>
+            <a href="#" className="hover:text-black hover:bg-gray-200 hover:rounded p-1">Users</a>
+            <a href="#" className="hover:text-black hover:bg-gray-200 hover:rounded p-1">Companies</a>
           </nav>
         </div>
 
